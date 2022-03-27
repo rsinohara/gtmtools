@@ -25,7 +25,7 @@ const VariableSchema = z.object({
   name: z.string(),
   type: z.string(),
   fingerprint: z.string(),
-  parentFolderId: z.string(),
+  parentFolderId: z.string().optional(),
   formatValue: z.object({}).optional(),
   parameter: z.array(ParameterSchema).optional(),
 }).strict()
@@ -70,7 +70,7 @@ const TriggerSchema = z.object({
   ).optional(),
   filter: z.array(TypedParameterList).optional(),
   fingerprint: z.string(),
-  parentFolderId: z.string(),
+  parentFolderId: z.string().optional(),
   parameter: z.array(ParameterSchema).optional(),
   waitForTags: ValueSchema.optional(),
   checkValidation: ValueSchema.optional(),
