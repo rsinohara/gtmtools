@@ -1,4 +1,4 @@
-import { Container } from './Container';
+import { Container, ContainerSchema } from './Container';
 import { compareContainers, ComparisonResult, ChangeList } from './compareContainers';
 import { Folder, Tag, Trigger, Variable } from "./Container"
 import { DeepPartial } from './DeepPartial';
@@ -31,6 +31,7 @@ const createContainerFromFixture = (fixture: containerFixture): DeepPartial<Cont
 const runTestsAfterFixtureSetup = () => describe('Compare containers', () => {
 
   describe.each(fixtures)('Fixture $name', (fixture) => {
+
     const fromContainer = createContainerFromFixture(fixture.fromContainer);
     const toContainer = createContainerFromFixture(fixture.toContainer);
     const comparison = compareContainers(fromContainer as Container, toContainer as Container);
@@ -175,6 +176,7 @@ fixtures.push({
 
   }
 });
+
 
 runTestsAfterFixtureSetup()
 export { }

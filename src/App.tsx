@@ -6,6 +6,7 @@ import { Container, ContainerSchema } from './utils/Container';
 import { compareContainers, ComparisonResult } from './utils/compareContainers';
 import ReactJson, { OnSelectProps } from 'react-json-view';
 import { any } from 'zod';
+import { removeMatchingFields } from './utils/removeMatchingFields';
 
 const VerticalStack = styled.div`
   display: flex;
@@ -115,9 +116,22 @@ function App() {
 
     const elementType = (selectInfo.namespace[0] || '').replace('Changes', '') as 'tag' | 'trigger' | 'folder' | 'variable'
 
-    setSelectedItem({
+    const items ={
       0: (containers[0]?.containerVersion[elementType] || [] as any).find((c: any) => c[elementType + 'Id'] === selectInfo.value),
       1: (containers[1]?.containerVersion[elementType] || [] as any).find((c: any) => c[elementType + 'Id'] === selectInfo.value),
+    }
+
+
+
+    setSelectedItem({
+      0: {
+        value: items[0],
+        changedFields: removeMatchingFields(items[0], items[1])
+      },
+      1: {
+        value: items[1],
+        changedFields: removeMatchingFields(items[1], items[0])
+      }
     })
   }
 

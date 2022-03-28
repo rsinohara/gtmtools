@@ -12,9 +12,11 @@ const ParameterSchema = z.object({
   list: z.object({}).or(z.array(z.any())).optional()
 }).strict()
 
+const ParameterArray = z.array(ParameterSchema).transform(c => c.sort((a, b) => a.key > b.key ? 1 : -1));
+
 const TypedParameterList = z.object({
   type: z.string(),
-  parameter: z.array(ParameterSchema),
+  parameter: ParameterArray
 }).strict()
 
 
@@ -27,7 +29,7 @@ const VariableSchema = z.object({
   fingerprint: z.string(),
   parentFolderId: z.string().optional(),
   formatValue: z.object({}).optional(),
-  parameter: z.array(ParameterSchema).optional(),
+  parameter: ParameterArray.optional(),
 }).strict()
 
 const FolderSchema = z.object({
@@ -42,7 +44,7 @@ const TagSchema = z.object({
   name: z.string(),
   type: z.string(),
   tagId: z.string(),
-  parameter: z.array(ParameterSchema),
+  parameter: ParameterArray,
   priority: ValueSchema.optional(),
 
   accountId: z.string(),
@@ -71,7 +73,7 @@ const TriggerSchema = z.object({
   filter: z.array(TypedParameterList).optional(),
   fingerprint: z.string(),
   parentFolderId: z.string().optional(),
-  parameter: z.array(ParameterSchema).optional(),
+  parameter: ParameterArray.optional(),
   waitForTags: ValueSchema.optional(),
   checkValidation: ValueSchema.optional(),
   waitForTagsTimeout: ValueSchema.optional(),
