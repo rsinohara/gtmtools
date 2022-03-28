@@ -20,6 +20,7 @@ const HorizontalStack = styled.div`
   flex-direction: row;
   justify-content: space-around;  
   align-items: flex-start;
+  margin-bottom: 15px;
 `
 const ErrorDisplay = styled.span`
   font-size: 12px;
@@ -116,7 +117,7 @@ function App() {
 
     const elementType = (selectInfo.namespace[0] || '').replace('Changes', '') as 'tag' | 'trigger' | 'folder' | 'variable'
 
-    const items ={
+    const items = {
       0: (containers[0]?.containerVersion[elementType] || [] as any).find((c: any) => c[elementType + 'Id'] === selectInfo.value),
       1: (containers[1]?.containerVersion[elementType] || [] as any).find((c: any) => c[elementType + 'Id'] === selectInfo.value),
     }
@@ -136,6 +137,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
+        Export your container from GTM and past each version in each box
         <HorizontalStack>
           <VerticalStack>
             <span>First container</span>
@@ -164,22 +166,28 @@ function App() {
             </ComparisonContainer>
             <SelectionContainer>
               {!!selectedItem[0] &&
-                <ReactJson src={selectedItem[0]}
-                  theme="pop"
-                  displayDataTypes={true}
-                  collapsed={false}
-                  enableClipboard={false}
-                ></ReactJson>
+                <>
+                  <span>Value in new Container:</span>
+                  <ReactJson src={selectedItem[0]}
+                    theme="pop"
+                    displayDataTypes={true}
+                    collapsed={false}
+                    enableClipboard={false}
+                  ></ReactJson>
+                </>
               }
             </SelectionContainer>
             <SelectionContainer>
               {!!selectedItem[1] &&
-                <ReactJson src={selectedItem[1]}
-                  theme="pop"
-                  displayDataTypes={true}
-                  collapsed={false}
-                  enableClipboard={false}
-                ></ReactJson>
+                <>
+                  <span>Value in initial container: </span>
+                  <ReactJson src={selectedItem[1]}
+                    theme="pop"
+                    displayDataTypes={true}
+                    collapsed={false}
+                    enableClipboard={false}
+                  ></ReactJson>
+                </>
               }
             </SelectionContainer>
           </HorizontalStack>
