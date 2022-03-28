@@ -121,16 +121,14 @@ function App() {
       1: (containers[1]?.containerVersion[elementType] || [] as any).find((c: any) => c[elementType + 'Id'] === selectInfo.value),
     }
 
-
-
     setSelectedItem({
       0: {
+        changedFields: removeMatchingFields(items[0], items[1]),
         value: items[0],
-        changedFields: removeMatchingFields(items[0], items[1])
       },
       1: {
+        changedFields: removeMatchingFields(items[1], items[0]),
         value: items[1],
-        changedFields: removeMatchingFields(items[1], items[0])
       }
     })
   }
