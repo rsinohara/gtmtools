@@ -5,7 +5,6 @@ import { CONTAINER_FORMAT_WRONG, VALUE_IS_NOT_JSON } from './utils/messages'
 import { Container, ContainerSchema } from './utils/Container';
 import { compareContainers, ComparisonResult } from './utils/compareContainers';
 import ReactJson, { OnSelectProps } from 'react-json-view';
-import { any } from 'zod';
 import { removeMatchingFields } from './utils/removeMatchingFields';
 
 const VerticalStack = styled.div`
@@ -29,7 +28,7 @@ const ErrorDisplay = styled.span`
 `
 const PrimaryButton = styled.button`
   width: 120px;
-  padding 5px;
+  padding: 5px;
   background-color: turquoise;
 `
 

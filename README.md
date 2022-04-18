@@ -15,7 +15,4 @@ You can see a nice diffby clicking on the list of changed items, to see the actu
 
 ### Roadmap
 * Allow users to select fields to ignore in the diff (since some fields are added as GTM version updates)
-* Detect unused variables
-* Detect unused triggers
-* Detect unused groups (variables + trigger no used anywhere else)
-* Take validation per field (such as tag name validation)
+* Display separately 'created-removed' items -- items that are the same but changed IDs (fingerprint also changes).
